@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="656a9e09-d2df-454c-8a9a-73647e2f804c" file="devv.yaml" key="mulesoft12345678">
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e724dc7f-1273-44c4-bb3c-31c3c871f95a" >
+		<http:listener-connection host="${secure::http.host}" port="${secure::http.port}" />
+	</http:listener-config>
+	<flow name="holidayFlow" doc:id="6d74dc6e-611e-434b-815d-5b20cccd96ef" >
+		<http:listener doc:name="Listener" doc:id="7e6e9114-40a2-47f5-815b-19b944cc5c51" config-ref="HTTP_Listener_config" path="${secure::http.path}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="fab11e54-7a17-4541-8082-555c40310b98" message="${secure::db.username}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="8fdaa25e-461d-4930-9c06-8bcc08557aba" message="${secure::db.password}"/>
+	</flow>
+</mule>

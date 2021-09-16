@@ -1,0 +1,9 @@
+http:
+  host: "localhost"
+  port: "9999"
+  path: "mrng"
+  
+db:
+  
+  username: "![Od0MEAEr640=]"
+  password: "![iQLuZe5NGjuLufH6TcaFnw==]"
